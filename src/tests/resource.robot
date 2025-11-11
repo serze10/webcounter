@@ -16,7 +16,6 @@ Open And Configure Browser
         Append To List    ${options}    --incognito
     ELSE IF    $BROWSER == 'firefox'
         Append To List    ${options}    --private-window
-        Append To List    ${options}    --binary=/usr/bin/firefox
     END
     IF    $HEADLESS == 'true'
         Append To List    ${options}    --headless

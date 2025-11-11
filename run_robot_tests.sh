@@ -1,6 +1,14 @@
 #!/bin/bash
 
+set -x
 echo "Running tests"
+
+# Debug environment
+which firefox
+firefox --version
+which geckodriver
+geckodriver --version
+echo $PATH
 
 # Käynnistetään Flask-palvelin taustalle
 poetry run python3 src/index.py &
