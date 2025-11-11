@@ -1,5 +1,6 @@
 *** Settings ***
-Library  SeleniumLibrary
+Library    SeleniumLibrary
+Library    Collections
 
 *** Variables ***
 ${SERVER}    localhost:5001
@@ -11,12 +12,12 @@ ${HEADLESS}  false
 *** Keywords ***
 Open And Configure Browser
     ${options}=    Create List
-    IF  $BROWSER == 'chrome'
+    IF    $BROWSER == 'chrome'
         Append To List    ${options}    --incognito
-    ELSE IF  $BROWSER == 'firefox'
+    ELSE IF    $BROWSER == 'firefox'
         Append To List    ${options}    --private-window
     END
-    IF  $HEADLESS == 'true'
+    IF    $HEADLESS == 'true'
         Append To List    ${options}    --headless
         Set Selenium Speed    0.05 seconds
     ELSE
