@@ -10,18 +10,16 @@ ${HEADLESS}  false
 
 *** Keywords ***
 Open And Configure Browser
+    ${options}=    Set Variable    ${EMPTY}
     IF  $BROWSER == 'chrome'
-        ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
-        Call Method  ${options}  add_argument  --incognito
+        ${options}=    Set Variable    --incognito
     ELSE IF  $BROWSER == 'firefox'
-        ${options}  Evaluate  sys.modules['selenium.webdriver'].FirefoxOptions()  sys
-        Call Method  ${options}  add_argument  --private-window
+        ${options}=    Set Variable    --private-window
     END
     IF  $HEADLESS == 'true'
+        ${options}=    Set Variable    ${options} --headless
         Set Selenium Speed  0.05 seconds
-        Call Method  ${options}  add_argument  --headless
     ELSE
         Set Selenium Speed  ${DELAY}
     END
-    Open Browser  browser=${BROWSER}  options=${options}*** Settings ***
-
+    Open Browser  ${HOME_URL}  ${BROWSER}  options=${options}
