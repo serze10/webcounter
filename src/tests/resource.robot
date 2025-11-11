@@ -10,16 +10,16 @@ ${HEADLESS}  false
 
 *** Keywords ***
 Open And Configure Browser
-    ${options}=    Set Variable    ${EMPTY}
+    ${options}=    Create List
     IF  $BROWSER == 'chrome'
-        ${options}=    Set Variable    --incognito
+        Append To List    ${options}    --incognito
     ELSE IF  $BROWSER == 'firefox'
-        ${options}=    Set Variable    --private-window
+        Append To List    ${options}    --private-window
     END
     IF  $HEADLESS == 'true'
-        ${options}=    Set Variable    ${options} --headless
-        Set Selenium Speed  0.05 seconds
+        Append To List    ${options}    --headless
+        Set Selenium Speed    0.05 seconds
     ELSE
-        Set Selenium Speed  ${DELAY}
+        Set Selenium Speed    ${DELAY}
     END
-    Open Browser  ${HOME_URL}  ${BROWSER}  options=${options}
+    Open Browser    ${HOME_URL}    ${BROWSER}    arguments=${options}
