@@ -15,7 +15,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install Poetry
         run: pip install poetry
@@ -26,12 +26,22 @@ jobs:
       - name: Install Chrome and Chromedriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable chromium-chromedriver \
-              libnss3 libxi6 libxcursor1 libxss1 libxrandr2 libasound2t64 \
-              libatk1.0-0t64 libatk-bridge2.0-0t64 libcups2t64
+          sudo apt-get install -y wget gnupg unzip
+          # Google Chrome
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+          # Chromedriver (match Chrome version)
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d. -f1)
+          DRIVER_VERSION=$(wget -qO- "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}")
+          wget "https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip"
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
           which google-chrome
           which chromedriver
 
       - name: Run Robot Framework tests
         run: |
-          bash run_robot_tests.sh
+          poetry run bash run_robot_tests.sh
