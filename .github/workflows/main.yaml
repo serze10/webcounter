@@ -29,6 +29,12 @@ jobs:
           tar -xzf geckodriver-*.tar.gz
           sudo mv geckodriver /usr/local/bin/
 
+      - name: Verify Firefox and Geckodriver
+        run: |
+          which firefox && firefox --version
+          which geckodriver && geckodriver --versio
+
+
       - name: Install dependencies
         run: poetry install
 
