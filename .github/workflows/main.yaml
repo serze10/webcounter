@@ -21,11 +21,14 @@ jobs:
       - name: Install Poetry
         run: pip install poetry
 
-      - name: Install Firefox and Geckodriver
+      - name: Install Firefox (deb) and Geckodriver
         run: |
           sudo apt-get update
           sudo apt-get remove -y firefox
-          sudo apt-get install -y firefox-esr
+          sudo add-apt-repository -y ppa:mozillateam/ppa
+          echo 'Package: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001' | sudo tee /etc/apt/preferences.d/mozilla-firefox
+          sudo apt-get update
+          sudo apt-get install -y firefox
           GECKODRIVER_VERSION=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
           wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
           tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
