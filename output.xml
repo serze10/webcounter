@@ -1,198 +1,233 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.3.2 (Python 3.12.3 on linux)" generated="2025-11-11T20:36:23.649687" rpa="false" schemaversion="5">
+<robot generator="Robot 7.3.2 (Python 3.12.3 on linux)" generated="2025-11-11T21:47:05.823763" rpa="false" schemaversion="5">
 <suite id="s1" name="Tests" source="/home/santersi/Ohjelmistotuotanto/webcounter/src/tests">
 <suite id="s1-s1" name="Increment" source="/home/santersi/Ohjelmistotuotanto/webcounter/src/tests/increment.robot">
 <kw name="Open And Configure Browser" owner="resource" type="SETUP">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-11-11T21:47:05.920375" level="INFO">${options} = []</msg>
+<var>${options}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-11-11T21:47:05.920181" elapsed="0.000230"/>
+</kw>
 <if>
 <branch type="IF" condition="$BROWSER == 'chrome'">
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-11-11T20:36:23.771857" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x76dac85061b0&gt;</msg>
-<var>${options}</var>
-<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
-<arg>sys</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-11-11T20:36:23.771502" elapsed="0.000395"/>
-</kw>
-<kw name="Call Method" owner="BuiltIn">
+<kw name="Append To List" owner="Collections">
 <arg>${options}</arg>
-<arg>add_argument</arg>
 <arg>--incognito</arg>
-<doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="PASS" start="2025-11-11T20:36:23.772025" elapsed="0.000144"/>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="NOT RUN" start="2025-11-11T21:47:05.920763" elapsed="0.000029"/>
 </kw>
-<status status="PASS" start="2025-11-11T20:36:23.770926" elapsed="0.001284"/>
+<status status="NOT RUN" start="2025-11-11T21:47:05.920532" elapsed="0.000297"/>
 </branch>
 <branch type="ELSE IF" condition="$BROWSER == 'firefox'">
-<kw name="Evaluate" owner="BuiltIn">
-<var>${options}</var>
-<arg>sys.modules['selenium.webdriver'].FirefoxOptions()</arg>
-<arg>sys</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="NOT RUN" start="2025-11-11T20:36:23.772327" elapsed="0.000019"/>
-</kw>
-<kw name="Call Method" owner="BuiltIn">
+<kw name="Append To List" owner="Collections">
 <arg>${options}</arg>
-<arg>add_argument</arg>
 <arg>--private-window</arg>
-<doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="NOT RUN" start="2025-11-11T20:36:23.772407" elapsed="0.000016"/>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-11-11T21:47:05.920975" elapsed="0.000133"/>
 </kw>
-<status status="NOT RUN" start="2025-11-11T20:36:23.772248" elapsed="0.000198"/>
+<status status="PASS" start="2025-11-11T21:47:05.920860" elapsed="0.000280"/>
 </branch>
-<status status="PASS" start="2025-11-11T20:36:23.770902" elapsed="0.001573"/>
+<status status="PASS" start="2025-11-11T21:47:05.920506" elapsed="0.000660"/>
 </if>
 <if>
 <branch type="IF" condition="$HEADLESS == 'true'">
+<kw name="Append To List" owner="Collections">
+<arg>${options}</arg>
+<arg>--headless</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="NOT RUN" start="2025-11-11T21:47:05.921313" elapsed="0.000015"/>
+</kw>
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>0.05 seconds</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="NOT RUN" start="2025-11-11T20:36:23.772691" elapsed="0.000019"/>
+<status status="NOT RUN" start="2025-11-11T21:47:05.921390" elapsed="0.000017"/>
 </kw>
-<kw name="Call Method" owner="BuiltIn">
-<arg>${options}</arg>
-<arg>add_argument</arg>
-<arg>--headless</arg>
-<doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="NOT RUN" start="2025-11-11T20:36:23.772769" elapsed="0.000015"/>
-</kw>
-<status status="NOT RUN" start="2025-11-11T20:36:23.772519" elapsed="0.000288"/>
+<status status="NOT RUN" start="2025-11-11T21:47:05.921208" elapsed="0.000220"/>
 </branch>
 <branch type="ELSE">
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>${DELAY}</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2025-11-11T20:36:23.772885" elapsed="0.000183"/>
+<status status="PASS" start="2025-11-11T21:47:05.921501" elapsed="0.000184"/>
 </kw>
-<status status="PASS" start="2025-11-11T20:36:23.772828" elapsed="0.000279"/>
+<status status="PASS" start="2025-11-11T21:47:05.921447" elapsed="0.000270"/>
 </branch>
-<status status="PASS" start="2025-11-11T20:36:23.772506" elapsed="0.000625"/>
+<status status="PASS" start="2025-11-11T21:47:05.921197" elapsed="0.000544"/>
 </if>
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-11-11T20:36:23.773378" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
-<msg time="2025-11-11T20:36:23.773463" level="INFO">Cannot capture screenshot because no browser is open.</msg>
-<msg time="2025-11-11T20:36:23.773537" level="FAIL">AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac85061b0&gt;*** Settings ***'</msg>
-<arg>browser=${BROWSER}</arg>
-<arg>options=${options}*** Settings ***</arg>
+<msg time="2025-11-11T21:47:05.922041" level="INFO">Opening browser 'firefox' to base url 'http://localhost:5001'.</msg>
+<arg>${HOME_URL}</arg>
+<arg>${BROWSER}</arg>
+<arg>arguments=${options}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="FAIL" start="2025-11-11T20:36:23.773199" elapsed="0.002382">AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac85061b0&gt;*** Settings ***'</status>
+<status status="PASS" start="2025-11-11T21:47:05.921812" elapsed="3.077836"/>
 </kw>
-<status status="FAIL" start="2025-11-11T20:36:23.770746" elapsed="0.004994">AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac85061b0&gt;*** Settings ***'</status>
+<status status="PASS" start="2025-11-11T21:47:05.919679" elapsed="3.080300"/>
 </kw>
 <test id="s1-s1-t1" name="At start the counter is zero" line="7">
-<status status="FAIL" start="2025-11-11T20:36:23.775813" elapsed="0.000286">Parent suite setup failed:
-AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac85061b0&gt;*** Settings ***'</status>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:09.001064" level="INFO">Opening url 'http://localhost:5001'</msg>
+<arg>${HOME_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-11-11T21:47:09.000827" elapsed="0.527911"/>
+</kw>
+<kw name="Title Should Be" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:10.031846" level="INFO">Page title is 'Laskuri'.</msg>
+<arg>Laskuri</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<status status="PASS" start="2025-11-11T21:47:09.529133" elapsed="0.502946"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:11.066634" level="INFO">Current page contains text 'nappia painettu 0 kertaa'.</msg>
+<arg>nappia painettu 0 kertaa</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-11-11T21:47:10.032512" elapsed="1.034425"/>
+</kw>
+<status status="PASS" start="2025-11-11T21:47:09.000177" elapsed="2.067398"/>
 </test>
 <test id="s1-s1-t2" name="When button pressed twice the counter is two" line="12">
-<status status="FAIL" start="2025-11-11T20:36:23.776249" elapsed="0.000168">Parent suite setup failed:
-AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac85061b0&gt;*** Settings ***'</status>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:11.069731" level="INFO">Opening url 'http://localhost:5001'</msg>
+<arg>${HOME_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-11-11T21:47:11.069383" elapsed="0.539844"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:11.610979" level="INFO">Clicking button 'Paina'.</msg>
+<arg>Paina</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-11T21:47:11.609957" elapsed="2.100441"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:13.712122" level="INFO">Clicking button 'Paina'.</msg>
+<arg>Paina</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-11T21:47:13.711175" elapsed="2.071041"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:16.796199" level="INFO">Current page contains text 'nappia painettu 2 kertaa'.</msg>
+<arg>nappia painettu 2 kertaa</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-11-11T21:47:15.782958" elapsed="1.013598"/>
+</kw>
+<status status="PASS" start="2025-11-11T21:47:11.068506" elapsed="5.728959"/>
 </test>
 <kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-11-11T20:36:23.776815" elapsed="0.000167"/>
+<status status="PASS" start="2025-11-11T21:47:16.799077" elapsed="3.158751"/>
 </kw>
-<status status="FAIL" start="2025-11-11T20:36:23.670466" elapsed="0.106553">Suite setup failed:
-AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac85061b0&gt;*** Settings ***'</status>
+<status status="PASS" start="2025-11-11T21:47:05.838783" elapsed="14.119105"/>
 </suite>
 <suite id="s1-s2" name="Reset" source="/home/santersi/Ohjelmistotuotanto/webcounter/src/tests/reset.robot">
 <kw name="Open And Configure Browser" owner="resource" type="SETUP">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-11-11T21:47:19.960563" level="INFO">${options} = []</msg>
+<var>${options}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-11-11T21:47:19.960462" elapsed="0.000123"/>
+</kw>
 <if>
 <branch type="IF" condition="$BROWSER == 'chrome'">
-<kw name="Evaluate" owner="BuiltIn">
-<msg time="2025-11-11T20:36:23.781869" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x76dac8505730&gt;</msg>
-<var>${options}</var>
-<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
-<arg>sys</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="PASS" start="2025-11-11T20:36:23.781585" elapsed="0.000316"/>
-</kw>
-<kw name="Call Method" owner="BuiltIn">
+<kw name="Append To List" owner="Collections">
 <arg>${options}</arg>
-<arg>add_argument</arg>
 <arg>--incognito</arg>
-<doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="PASS" start="2025-11-11T20:36:23.782012" elapsed="0.000134"/>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="NOT RUN" start="2025-11-11T21:47:19.960845" elapsed="0.000021"/>
 </kw>
-<status status="PASS" start="2025-11-11T20:36:23.781324" elapsed="0.000861"/>
+<status status="NOT RUN" start="2025-11-11T21:47:19.960661" elapsed="0.000235"/>
 </branch>
 <branch type="ELSE IF" condition="$BROWSER == 'firefox'">
-<kw name="Evaluate" owner="BuiltIn">
-<var>${options}</var>
-<arg>sys.modules['selenium.webdriver'].FirefoxOptions()</arg>
-<arg>sys</arg>
-<doc>Evaluates the given expression in Python and returns the result.</doc>
-<status status="NOT RUN" start="2025-11-11T20:36:23.782294" elapsed="0.000019"/>
-</kw>
-<kw name="Call Method" owner="BuiltIn">
+<kw name="Append To List" owner="Collections">
 <arg>${options}</arg>
-<arg>add_argument</arg>
 <arg>--private-window</arg>
-<doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="NOT RUN" start="2025-11-11T20:36:23.782372" elapsed="0.000016"/>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-11-11T21:47:19.961177" elapsed="0.000120"/>
 </kw>
-<status status="NOT RUN" start="2025-11-11T20:36:23.782221" elapsed="0.000193"/>
+<status status="PASS" start="2025-11-11T21:47:19.960923" elapsed="0.000408"/>
 </branch>
-<status status="PASS" start="2025-11-11T20:36:23.781301" elapsed="0.001137"/>
+<status status="PASS" start="2025-11-11T21:47:19.960640" elapsed="0.000716"/>
 </if>
 <if>
 <branch type="IF" condition="$HEADLESS == 'true'">
+<kw name="Append To List" owner="Collections">
+<arg>${options}</arg>
+<arg>--headless</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="NOT RUN" start="2025-11-11T21:47:19.961504" elapsed="0.000017"/>
+</kw>
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>0.05 seconds</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="NOT RUN" start="2025-11-11T20:36:23.782607" elapsed="0.000019"/>
+<status status="NOT RUN" start="2025-11-11T21:47:19.961584" elapsed="0.000015"/>
 </kw>
-<kw name="Call Method" owner="BuiltIn">
-<arg>${options}</arg>
-<arg>add_argument</arg>
-<arg>--headless</arg>
-<doc>Calls the named method of the given object with the provided arguments.</doc>
-<status status="NOT RUN" start="2025-11-11T20:36:23.782690" elapsed="0.000016"/>
-</kw>
-<status status="NOT RUN" start="2025-11-11T20:36:23.782479" elapsed="0.000252"/>
+<status status="NOT RUN" start="2025-11-11T21:47:19.961393" elapsed="0.000227"/>
 </branch>
 <branch type="ELSE">
 <kw name="Set Selenium Speed" owner="SeleniumLibrary">
 <arg>${DELAY}</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" start="2025-11-11T20:36:23.782814" elapsed="0.000188"/>
+<status status="PASS" start="2025-11-11T21:47:19.961693" elapsed="0.000176"/>
 </kw>
-<status status="PASS" start="2025-11-11T20:36:23.782754" elapsed="0.000284"/>
+<status status="PASS" start="2025-11-11T21:47:19.961639" elapsed="0.000263"/>
 </branch>
-<status status="PASS" start="2025-11-11T20:36:23.782468" elapsed="0.000661"/>
+<status status="PASS" start="2025-11-11T21:47:19.961384" elapsed="0.000541"/>
 </if>
 <kw name="Open Browser" owner="SeleniumLibrary">
-<msg time="2025-11-11T20:36:23.783421" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
-<msg time="2025-11-11T20:36:23.783518" level="INFO">Cannot capture screenshot because no browser is open.</msg>
-<msg time="2025-11-11T20:36:23.783596" level="FAIL">AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac8505730&gt;*** Settings ***'</msg>
-<arg>browser=${BROWSER}</arg>
-<arg>options=${options}*** Settings ***</arg>
+<msg time="2025-11-11T21:47:19.962297" level="INFO">Opening browser 'firefox' to base url 'http://localhost:5001'.</msg>
+<arg>${HOME_URL}</arg>
+<arg>${BROWSER}</arg>
+<arg>arguments=${options}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<status status="FAIL" start="2025-11-11T20:36:23.783229" elapsed="0.000802">AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac8505730&gt;*** Settings ***'</status>
+<status status="PASS" start="2025-11-11T21:47:19.962075" elapsed="2.850965"/>
 </kw>
-<status status="FAIL" start="2025-11-11T20:36:23.781130" elapsed="0.003077">AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac8505730&gt;*** Settings ***'</status>
+<status status="PASS" start="2025-11-11T21:47:19.960295" elapsed="2.853135"/>
 </kw>
 <test id="s1-s2-t1" name="When counter has a nonzero value and it is reset the value becomes zero" line="7">
-<status status="FAIL" start="2025-11-11T20:36:23.784287" elapsed="0.000326">Parent suite setup failed:
-AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac8505730&gt;*** Settings ***'</status>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:22.815865" level="INFO">Opening url 'http://localhost:5001'</msg>
+<arg>${HOME_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2025-11-11T21:47:22.815295" elapsed="0.541200"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:24.394749" level="INFO">Current page contains text 'nappia painettu 2 kertaa'.</msg>
+<arg>nappia painettu 2 kertaa</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-11-11T21:47:23.357192" elapsed="1.037841"/>
+</kw>
+<kw name="Click Button" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:24.396048" level="INFO">Clicking button 'Nollaa'.</msg>
+<arg>Nollaa</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="PASS" start="2025-11-11T21:47:24.395608" elapsed="2.094996"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2025-11-11T21:47:27.503331" level="INFO">Current page contains text 'nappia painettu 0 kertaa'.</msg>
+<arg>nappia painettu 0 kertaa</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2025-11-11T21:47:26.491322" elapsed="1.012327"/>
+</kw>
+<status status="PASS" start="2025-11-11T21:47:22.813650" elapsed="4.690571"/>
 </test>
 <kw name="Close Browser" owner="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2025-11-11T20:36:23.784970" elapsed="0.000182"/>
+<status status="PASS" start="2025-11-11T21:47:27.505199" elapsed="1.202599"/>
 </kw>
-<status status="FAIL" start="2025-11-11T20:36:23.777421" elapsed="0.007774">Suite setup failed:
-AttributeError: 'Options' object has no attribute '&lt;selenium.webdriver.chrome.options.Options object at 0x76dac8505730&gt;*** Settings ***'</status>
+<status status="PASS" start="2025-11-11T21:47:19.958287" elapsed="8.749704"/>
 </suite>
-<status status="FAIL" start="2025-11-11T20:36:23.650271" elapsed="0.135474"/>
+<status status="PASS" start="2025-11-11T21:47:05.824459" elapsed="22.885037"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="3" skip="0">All Tests</stat>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat name="Tests" id="s1" pass="0" fail="3" skip="0">Tests</stat>
-<stat name="Increment" id="s1-s1" pass="0" fail="2" skip="0">Tests.Increment</stat>
-<stat name="Reset" id="s1-s2" pass="0" fail="1" skip="0">Tests.Reset</stat>
+<stat name="Tests" id="s1" pass="3" fail="0" skip="0">Tests</stat>
+<stat name="Increment" id="s1-s1" pass="2" fail="0" skip="0">Tests.Increment</stat>
+<stat name="Reset" id="s1-s2" pass="1" fail="0" skip="0">Tests.Reset</stat>
 </suite>
 </statistics>
 <errors>

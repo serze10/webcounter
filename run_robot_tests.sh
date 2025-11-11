@@ -2,24 +2,24 @@
 
 echo "Running tests"
 
-# käynnistetään Flask-palvelin taustalle
+# Käynnistetään Flask-palvelin taustalle
 poetry run python3 src/index.py &
 
 echo "started Flask server"
 
-# odetetaan, että palvelin on valmiina ottamaan vastaan pyyntöjä
+# Odotetaan, että palvelin on valmis
 while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:5001)" != "200" ]];
   do sleep 1;
 done
 
 echo "Flask server is ready"
 
-# suoritetaan testit
+# Suoritetaan testit Firefoxilla headless-tilassa
 poetry run robot --variable BROWSER:firefox --variable HEADLESS:true src/tests
 
 status=$?
 
-# pysäytetään Flask-palvelin portissa 5001
+# Pysäytetään Flask-palvelin
 kill $(lsof -t -i:5001)
 
 exit $status
