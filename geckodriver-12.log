@@ -1,0 +1,24 @@
+1762936206496	geckodriver	INFO	Listening on 127.0.0.1:49283
+1762936206556	mozrunner::runner	INFO	Running command: MOZ_CRASHREPORTER="1" MOZ_CRASHREPORTER_NO_REPORT="1" MOZ_CRASHREPORTER_SHUTDOWN="1" "/usr/bin/firefox" "--m ... te" "--remote-debugging-port" "50939" "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "/tmp/rust_mozprofilebettSW"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1762936207513	Marionette	INFO	Marionette enabled
+[Parent 25457, Main Thread] WARNING: gdk_wayland_window_set_dbus_properties_libgtk_only: assertion 'GDK_IS_WAYLAND_WINDOW (window)' failed: 'glib warning', file /build/firefox-gCr4Qt/firefox-144.0.2+build1/toolkit/xre/nsSigHandlers.cpp:201
+
+(firefox:25457): Gdk-CRITICAL **: 10:30:07.626: gdk_wayland_window_set_dbus_properties_libgtk_only: assertion 'GDK_IS_WAYLAND_WINDOW (window)' failed
+1762936207680	Marionette	INFO	Listening on port 44045
+WebDriver BiDi listening on ws://127.0.0.1:50939
+Read port: 44045
+1762936207872	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[Parent 25457, Main Thread] WARNING: gdk_wayland_window_set_dbus_properties_libgtk_only: assertion 'GDK_IS_WAYLAND_WINDOW (window)' failed: 'glib warning', file /build/firefox-gCr4Qt/firefox-144.0.2+build1/toolkit/xre/nsSigHandlers.cpp:201
+
+(firefox:25457): Gdk-CRITICAL **: 10:30:08.093: gdk_wayland_window_set_dbus_properties_libgtk_only: assertion 'GDK_IS_WAYLAND_WINDOW (window)' failed
+[Parent 25457, Main Thread] WARNING: gdk_wayland_window_set_dbus_properties_libgtk_only: assertion 'GDK_IS_WAYLAND_WINDOW (window)' failed: 'glib warning', file /build/firefox-gCr4Qt/firefox-144.0.2+build1/toolkit/xre/nsSigHandlers.cpp:201
+
+(firefox:25457): Gdk-CRITICAL **: 10:30:08.094: gdk_wayland_window_set_dbus_properties_libgtk_only: assertion 'GDK_IS_WAYLAND_WINDOW (window)' failed
+1762936215155	Marionette	INFO	Stopped listening on port 44045
+console.error: "Failed to fetch https://spocs.getpocket.com/user:" "NetworkError when attempting to fetch resource."
+console.error: (new TypeError("NetworkError when attempting to fetch resource.", ""))
+console.error: (new Error("OHTTP was configured for https://ads.mozilla.org/v1/delete_user but we couldn't fetch a valid config", "moz-src:///browser/modules/ContextId.sys.mjs", 234))
+console.warn: TopSitesFeed: Failed to fetch data from MARS server: NetworkError when attempting to fetch resource.
+JavaScript error: resource://gre/modules/ObliviousHTTP.sys.mjs, line 117: NS_ERROR_XPC_CANT_CONVERT_PRIMITIVE_TO_ARRAY: Cannot convert primitive JavaScript value into an array arg 2 [nsIObliviousHttpService.newChannel]

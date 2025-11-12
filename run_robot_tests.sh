@@ -2,6 +2,9 @@
 set -x
 echo "Running tests"
 
+# Käytetään virtuaalista näyttöä CI:ssä
+export DISPLAY=:99
+
 # Pakotetaan PATH, jotta snap ei sotke
 export PATH=/usr/local/bin:/usr/bin:$PATH
 

@@ -29,15 +29,19 @@ jobs:
           echo "Package: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001" | sudo tee /etc/apt/preferences.d/mozilla-firefox
           sudo apt-get update
           sudo apt-get install -y firefox
-          # Asenna uusin geckodriver (v0.36.0)
           GECKODRIVER_VERSION=v0.36.0
           wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
           tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
           sudo mv geckodriver /usr/local/bin/
-          # Debug
           export PATH=/usr/local/bin:/usr/bin:$PATH
           which firefox && firefox --version
           which geckodriver && geckodriver --version
+
+      - name: Start virtual display
+        run: |
+          sudo apt-get install -y xvfb
+          Xvfb :99 -screen 0 1920x1080x24 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: poetry install
