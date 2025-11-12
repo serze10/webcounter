@@ -23,4 +23,4 @@ Open And Configure Browser
     ELSE
         Set Selenium Speed    ${DELAY}
     END
-    Open Browser    ${HOME_URL}    ${BROWSER}    arguments=${options}
+    Open Browser    ${HOME_URL}    ${BROWSER}    arguments=${options}z
