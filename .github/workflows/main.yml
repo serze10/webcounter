@@ -24,17 +24,17 @@ jobs:
       - name: Install Firefox (deb) and Geckodriver
         run: |
           sudo apt-get update
-          sudo apt-get remove -y firefox
+          sudo apt-get purge -y firefox snapd
           sudo add-apt-repository -y ppa:mozillateam/ppa
           echo "Package: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001" | sudo tee /etc/apt/preferences.d/mozilla-firefox
           sudo apt-get update
           sudo apt-get install -y firefox
-          # Kiinteä geckodriver-versio
           GECKODRIVER_VERSION=v0.34.0
           wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
           tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
           sudo mv geckodriver /usr/local/bin/
           # Debug
+          export PATH=/usr/local/bin:/usr/bin:$PATH
           which firefox && firefox --version
           which geckodriver && geckodriver --version
 
