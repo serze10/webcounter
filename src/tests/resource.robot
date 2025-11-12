@@ -16,6 +16,8 @@ Open And Configure Browser
         Append To List    ${options}    --incognito
     ELSE IF    $BROWSER == 'firefox'
         Append To List    ${options}    --private-window
+        Append To List    ${options}    --no-sandbox
+        Append To List    ${options}    --disable-dev-shm-usage
     END
     IF    $HEADLESS == 'true'
         Append To List    ${options}    --headless
@@ -23,4 +25,4 @@ Open And Configure Browser
     ELSE
         Set Selenium Speed    ${DELAY}
     END
-    Open Browser    ${HOME_URL}    ${BROWSER}    arguments=${options}z
+    Open Browser    ${HOME_URL}    ${BROWSER}    arguments=${options}
