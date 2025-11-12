@@ -4,25 +4,15 @@ Library    Collections
 
 *** Variables ***
 ${SERVER}    localhost:5001
-${DELAY}     0.5 seconds
 ${HOME_URL}  http://${SERVER}
-${BROWSER}   chrome
-${HEADLESS}  false
+${HEADLESS}  true
 
 *** Keywords ***
 Open And Configure Browser
-    ${options}=    Create List
-    IF    $BROWSER == 'chrome'
-        Append To List    ${options}    --incognito
-    ELSE IF    $BROWSER == 'firefox'
-        Append To List    ${options}    --private-window
-        Append To List    ${options}    --no-sandbox
-        Append To List    ${options}    --disable-dev-shm-usage
-    END
-    IF    $HEADLESS == 'true'
-        Append To List    ${options}    --headless
-        Set Selenium Speed    0.05 seconds
-    ELSE
-        Set Selenium Speed    ${DELAY}
-    END
-    Open Browser    ${HOME_URL}    ${BROWSER}    arguments=${options}
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].FirefoxOptions()    sys, selenium.webdriver
+    Call Method    ${options}    add_argument    --headless
+    Call Method    ${options}    add_argument    --no-sandbox
+    Call Method    ${options}    add_argument    --disable-dev-shm-usage
+    Create Webdriver    Firefox    options=${options}
+    Set Window Size    1920    1080
+    Go To    ${HOME_URL}
