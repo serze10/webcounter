@@ -2,10 +2,7 @@
 set -x
 echo "Running tests"
 
-# Käytetään virtuaalista näyttöä CI:ssä
 export DISPLAY=:99
-
-# Pakotetaan PATH, jotta snap ei sotke
 export PATH=/usr/local/bin:/usr/bin:$PATH
 
 # Debug
@@ -14,6 +11,7 @@ firefox --version
 which geckodriver
 geckodriver --version
 echo $PATH
+ps -ef | grep Xvfb
 
 # Käynnistetään Flask-palvelin taustalle
 poetry run python3 src/index.py &
@@ -23,12 +21,9 @@ echo "started Flask server"
 while [[ "$(curl -s -o /dev/null -w '%{http_code}' localhost:5001)" != "200" ]]; do sleep 1; done
 echo "Flask server is ready"
 
-# Suoritetaan testit Firefoxilla headless-tilassa
-poetry run robot --variable BROWSER:firefox --variable HEADLESS:true src/tests
+# Suoritetaan testit Firefoxilla headless-tilassa ja pidemmällä timeoutilla
+poetry run robot --variable BROWSER:firefox --variable HEADLESS:true --variable SELENIUM_TIMEOUT:30 src/tests
 
 status=$?
-
-# Pysäytetään Flask-palvelin
 kill $(lsof -t -i:5001)
-
 exit $status
