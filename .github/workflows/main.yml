@@ -59,3 +59,4 @@ jobs:
           path: |
             output.xml
             log.html
+            report.html
