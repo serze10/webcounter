@@ -36,8 +36,11 @@ jobs:
           tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
           sudo mv geckodriver /usr/local/bin/
           export PATH=/usr/local/bin:/usr/bin:$PATH
+          export MOZ_HEADLESS=1
+          firefox --headless --version
           which firefox && firefox --version
           which geckodriver && geckodriver --version
+
 
       - name: Start virtual display
         run: |
