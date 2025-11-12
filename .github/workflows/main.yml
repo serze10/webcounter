@@ -21,7 +21,7 @@ jobs:
       - name: Install Poetry
         run: pip install poetry
 
-      - name: Install Firefox (deb), Geckodriver, and dependencies
+      - name: Install Firefox, Geckodriver, and dependencies
         run: |
           sudo apt-get update
           sudo apt-get purge -y firefox snapd
@@ -31,7 +31,6 @@ jobs:
           sudo apt-get install -y firefox xvfb \
             libgtk-3-0 libdbus-glib-1-2 libxt6 libx11-xcb1 libasound2t64 \
             fonts-liberation libnss3 libxcomposite1 libxdamage1 libxrandr2 libxss1 libxkbcommon0
-          # Asenna geckodriver
           GECKODRIVER_VERSION=v0.36.0
           wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
           tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
@@ -44,6 +43,7 @@ jobs:
         run: |
           Xvfb :99 -screen 0 1920x1080x24 &
           echo "DISPLAY=:99" >> $GITHUB_ENV
+          echo "MOZ_HEADLESS=1" >> $GITHUB_ENV
           sleep 3
           ps -ef | grep Xvfb
 
