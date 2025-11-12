@@ -29,7 +29,7 @@ jobs:
           echo "Package: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001" | sudo tee /etc/apt/preferences.d/mozilla-firefox
           sudo apt-get update
           sudo apt-get install -y firefox xvfb \
-            libgtk-3-0 libdbus-glib-1-2 libxt6 libx11-xcb1 libasound2 \
+            libgtk-3-0 libdbus-glib-1-2 libxt6 libx11-xcb1 libasound2t64 \
             fonts-liberation libnss3 libxcomposite1 libxdamage1 libxrandr2 libxss1 libxkbcommon0
           # Asenna geckodriver
           GECKODRIVER_VERSION=v0.36.0
