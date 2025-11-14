@@ -9,57 +9,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v5
-
       - name: Set up Python 3.12
         uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-
       - name: Install Poetry
         run: pip install poetry
-
-      - name: Install Firefox, Geckodriver, and dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get purge -y firefox snapd
-          sudo add-apt-repository -y ppa:mozillateam/ppa
-          echo "Package: *\nPin: release o=LP-PPA-mozillateam\nPin-Priority: 1001" | sudo tee /etc/apt/preferences.d/mozilla-firefox
-          sudo apt-get update
-          sudo apt-get install -y firefox xvfb \
-            libgtk-3-0 libdbus-glib-1-2 libxt6 libx11-xcb1 libasound2t64 \
-            fonts-liberation libnss3 libxcomposite1 libxdamage1 libxrandr2 libxss1 libxkbcommon0
-          GECKODRIVER_VERSION=v0.36.0
-          wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-          tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-          sudo mv geckodriver /usr/local/bin/
-          export PATH=/usr/local/bin:/usr/bin:$PATH
-          export MOZ_HEADLESS=1
-          firefox --headless --version
-          which firefox && firefox --version
-          which geckodriver && geckodriver --version
-
-
-      - name: Start virtual display
-        run: |
-          Xvfb :99 -screen 0 1920x1080x24 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV
-          sleep 3
-          ps -ef | grep Xvfb
-
+      - name: Setup chromedriver
+        uses: nanasess/setup-chromedriver@master
+      - run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
       - name: Install dependencies
         run: poetry install
-
-      - name: Run Robot Framework tests
-        run: poetry run bash run_robot_tests.sh
-
-      - name: Upload Robot Framework reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: robot-reports
-          path: |
-            output.xml
-            log.html
-            report.html
+      - name: Run robot tests
+        run: bash run_robot_tests.sh
