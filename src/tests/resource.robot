@@ -16,3 +16,8 @@ Open And Configure Browser
     Create Webdriver    Firefox    options=${options}
     Set Window Size    1920    1080
     Go To    ${HOME_URL}
+    Reset Counter
+
+
+Reset Counter
+    Click Button    Nollaa
